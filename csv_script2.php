@@ -1,9 +1,16 @@
 <?php
 
-#$testfile="src/test.csv";
+/**
+ * 
+ * 
+ * 
+ */
+
+
 $dir = "src/";
 $i=0;
 $filelist=array();
+// Change this variable...
 $col_name="RPM";
 
 
