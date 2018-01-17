@@ -1,14 +1,10 @@
 <?php
 
-#echo "Hello World";
-#echo "\n";
-#echo 1+1;
-
-$testfile="src/test.csv";
+#$testfile="src/test.csv";
 $dir = "src/";
 $i=0;
 $filelist=array();
-$col_name="Speed";
+$col_name="RPM";
 
 
 // Open a directory, and read its contents
@@ -43,14 +39,15 @@ if (is_dir($dir)){
       # Run threw lines of current csv file
       while($j < count($current_csv))
       {
-        echo "Value Speed:".$current_csv[$j]["Speed"]."\n";
+        echo "Value ".$col_name.":".$current_csv[$j][$col_name]."\n";
         
         $sum = $sum + $current_csv[$j][$col_name];
         
         $j++;
       }
 
-      echo $average = $sum / count($current_csv);
+      echo "Average ".$col_name.":".$average = $sum / count($current_csv);
+      echo "\n";
       //echo "END OF FILE\n";
 
       
@@ -67,7 +64,7 @@ if (is_dir($dir)){
  * Example
  */
 
-$result =  csv_to_array($testfile);
+#$result =  csv_to_array($testfile);
 
 
 #var_dump($result);
