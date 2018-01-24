@@ -7,16 +7,29 @@
  */
 
 
-$dir = "src/";
+$src_dir = "src/";
+$output_dir = "output/";
 $i=0;
 $filelist=array();
+$content="";
 // Change this variable...
-$col_name="RPM";
+
+//$col_name="Speed";
+$col_name=$argv[1];
+
+// echo $argv[1];
+
+//$output_file = $output_dir.'output_test.txt';
+$output_file = $output_dir.'output_average_'.$col_name.'.txt';
+$fp = fopen($output_file,"wb");
+
+
+
 
 
 // Open a directory, and read its contents
-if (is_dir($dir)){
-    if ($dh = opendir($dir)){
+if (is_dir($src_dir)){
+    if ($dh = opendir($src_dir)){
       while (($file = readdir($dh)) !== false){
         #echo "filename:" . $file . "\n";
         if ( $file != "." && $file != ".."){
@@ -31,9 +44,6 @@ if (is_dir($dir)){
   }
 
 
-
-// var_dump($filelist);
-
 // Loop: Run threw file list
 
     $i = 0;
@@ -43,21 +53,35 @@ if (is_dir($dir)){
       $j = 0; $sum=0;
       $current_csv = csv_to_array("src/".$filelist[$i]);
       
+      $content .= "Start File: ".$filelist[$i]."\n";
+
       # Run threw lines of current csv file
       while($j < count($current_csv))
       {
-        echo "Value ".$col_name.":".$current_csv[$j][$col_name]."\n";
         
-        $sum = $sum + $current_csv[$j][$col_name];
+
+        $content .= $current_csv[$j][$col_name];
+        $content .= "\n";
+
+
+        // Einfache Ausgabe
+        //echo "Value ".$col_name.":".$current_csv[$j][$col_name]."\n";
+        //$sum = $sum + $current_csv[$j][$col_name];
         
         $j++;
       }
 
-      echo "Average ".$col_name.":".$average = $sum / count($current_csv);
-      echo "\n";
-      //echo "END OF FILE\n";
+      // Output average
+     // echo "Average ".$col_name.":".$average = $sum / count($current_csv);
+     // echo "\n";
+     
 
-      
+     // file_put_contents($output_file, $output);
+
+     fwrite($fp,$content);
+
+
+
       # echo $filelist[$i]."\n";
       //echo "\n";
       $i++;
