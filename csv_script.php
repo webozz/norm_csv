@@ -20,7 +20,7 @@ $col_name=$argv[1];
 // echo $argv[1];
 
 //$output_file = $output_dir.'output_test.txt';
-$output_file = $output_dir.'output_average_'.$col_name.'.txt';
+$output_file = $output_dir.'output_average_'.$col_name.'.csv';
 $fp = fopen($output_file,"wb");
 
 
@@ -43,6 +43,7 @@ if (is_dir($src_dir)){
     }
   }
 
+// var_dump($filelist);  
 
 // Loop: Run threw file list
 
@@ -50,23 +51,23 @@ if (is_dir($src_dir)){
     
     while($i < count($filelist))
     {
-      $j = 0; $sum=0;
+      $j = 0; $sum=0; $content="";
       $current_csv = csv_to_array("src/".$filelist[$i]);
       
-      $content .= "Start File: ".$filelist[$i]."\n";
+      $content .= "File: ;".$filelist[$i].";";
 
       # Run threw lines of current csv file
       while($j < count($current_csv))
       {
         
 
-        $content .= $current_csv[$j][$col_name];
-        $content .= "\n";
+        //$content .= $current_csv[$j][$col_name];
+        //$content .= "\n";
 
 
         // Einfache Ausgabe
         //echo "Value ".$col_name.":".$current_csv[$j][$col_name]."\n";
-        //$sum = $sum + $current_csv[$j][$col_name];
+        $sum = $sum + $current_csv[$j][$col_name];
         
         $j++;
       }
@@ -75,7 +76,8 @@ if (is_dir($src_dir)){
      // echo "Average ".$col_name.":".$average = $sum / count($current_csv);
      // echo "\n";
      
-
+     $content .= "Average: ;".$sum.";";
+     $content .= "\n";
      // file_put_contents($output_file, $output);
 
      fwrite($fp,$content);
