@@ -76,7 +76,7 @@ if (is_dir($src_dir)){
      // echo "Average ".$col_name.":".$average = $sum / count($current_csv);
      // echo "\n";
      
-     $content .= "Average: ;".$sum.";";
+     $content .= "Average: ;".$sum/count($current_csv).";";
      $content .= "\n";
      // file_put_contents($output_file, $output);
 
